@@ -18,8 +18,8 @@ from django.conf.urls import url, include
 from Film import views
 
 urlpatterns = [
-    url(r'^$',views.index),
+    # url(r'^$', views.index),
     url(r'^cinema/', include('Cinema.urls', namespace='cinema')),
-    url(r'^user/',include('User.urls',namespace='user')),
-    url(r'^film/',include('Film.urls',namespace='film'))
+    url(r'^user/', include('User.urls', namespace='user')),
+    url(r'^film/', include('Film.urls', namespace='film'))
 ]

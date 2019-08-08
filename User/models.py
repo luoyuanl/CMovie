@@ -1,4 +1,5 @@
 import hashlib
+
 from django.db import models
 
 
@@ -7,23 +8,22 @@ from django.db import models
 class Users(models.Model):
     # 自定义性别
     gender = ((1, '保密'), (2, '男'), (3, '女'))
+
     user_id = models.AutoField(primary_key=True)
-    user_name = models.CharField(max_length=60)
+    # user_name = models.CharField(max_length=60,unique=True)
     user_password = models.CharField(max_length=128)
     user_nickname = models.CharField(max_length=60, blank=True)
     user_gender = models.IntegerField(choices=gender, default=1)
-    user_birthday = models.DateField(null=True)
+    user_birthday = models.DateField(blank=True)
     user_signature = models.CharField(max_length=200, blank=True)
     user_photo = models.ImageField(max_length=256, blank=True)
     user_phone = models.CharField(max_length=20, unique=True)
-    user_email = models.CharField(max_length=100, unique=True)
+    user_email = models.CharField(max_length=100, blank=True)
     user_regtime = models.DateTimeField(auto_now_add=True)
 
-    # user_hobby = models.CharField(max_length=200)
-    # user_type = models.CharField(max_length=30)
-    # user_job1 = models.CharField(max_length=30)    # 大行业
-    # user_job2 = models.CharField(max_length=30)  # 细分行业
+    # 函数
 
+    # 密码存成hash
     @property
     def password(self):
         return self.user_password
@@ -31,6 +31,45 @@ class Users(models.Model):
     @password.setter
     def password(self, value):
         self.user_password = hashlib.sha1(value.encode('utf8')).hexdigest()
+
+    # 注册
+    @classmethod
+    def register(cls, request):
+        user = Users.objects.create()
+        user.user_phone = request.Get.get('mobile')
+        user.password = request.Get.get('password')
+        user.save()
+
+    # 登录
+    def login(self, request):
+        if self.user_password == hashlib.sha1(request.Get.get('password').encode('utf8')).hexdigest():
+            return True
+        else:
+            return False
+
+    # 修改个人信息
+    def changeinfo(self):
+        pass
+
+    # 订票
+    def orderticket(self):
+        pass
+
+    # 支付
+    def payorder(self):
+        pass
+
+    # 发表评论
+    def comment(self):
+        pass
+
+    # 给评论点赞
+    def point(self):
+        pass
+
+    # 给电影评分
+    def mark(self):
+        pass
 
 
 # 评论表
