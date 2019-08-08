@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7371dd57-cc22-4367-a318-5def85d9fe0f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMovie/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CMovie/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cinema/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cinema/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Cinema/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Film/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Film/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/User/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -65,16 +59,16 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/User/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+            <state relative-caret-position="546">
+              <caret line="29" column="65" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="65" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Cinema/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="260">
@@ -141,14 +135,14 @@
         <option value="$PROJECT_DIR$/Cinema/views.py" />
         <option value="$PROJECT_DIR$/templates/common/base.html" />
         <option value="$PROJECT_DIR$/Cinema/tests.py" />
-        <option value="$PROJECT_DIR$/User/models.py" />
         <option value="$PROJECT_DIR$/Film/models.py" />
         <option value="$PROJECT_DIR$/CMovie/settings.py" />
         <option value="$PROJECT_DIR$/Cinema/models.py" />
+        <option value="$PROJECT_DIR$/User/models.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="977" />
     <option name="width" value="939" />
     <option name="height" value="1047" />
@@ -273,12 +267,12 @@
       <option name="presentableId" value="Default" />
       <updated>1565169209191</updated>
       <workItem from="1565169295463" duration="13239000" />
-      <workItem from="1565224227595" duration="3108000" />
+      <workItem from="1565224227595" duration="3793000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16347000" />
+    <option name="totallyTimeSpent" value="17032000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -290,7 +284,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="977" y="0" width="939" height="1047" extended-state="1" />
+    <frame x="977" y="0" width="939" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2377702" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -411,13 +406,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/User/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Cinema/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
@@ -443,6 +431,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
           <caret line="10" column="48" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="29" column="65" selection-start-line="29" selection-start-column="65" selection-end-line="29" selection-end-column="65" />
         </state>
       </provider>
     </entry>
