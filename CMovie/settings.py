@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'CMovie.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'film_ticket',
+        'NAME': 'CMovie',
         'HOST':'10.0.108.41',
         'USER':'root',
         'PASSWORD':'524107',
