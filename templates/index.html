@@ -1,4 +1,3 @@
-{% extends 'common/base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +5,17 @@
     <title>{{ title }}</title>
 </head>
 <body>
-{% block content %}
-{% endblock content %}
+<form action="{% url 'user:register' %}" method="post">
+    {% csrf_token %}
+    <label>
+        <input type="text" name="mobile"/>
+    </label>手机号
+    <label>
+        <input type="password" name="password"/>
+    </label>密码
+    <input type="submit">
+</form>
+
 <h1>
 </h1>
 
