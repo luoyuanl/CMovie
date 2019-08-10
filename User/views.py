@@ -8,7 +8,7 @@ from User.models import Users
 def index(request):
     # 右上角用户登陆位置显示request.session['username'],为手机号
     username = request.session.get('username')
-    return render(request, 'common/new_file.html', context={'data': username})
+    return render(request, 'common/base.html', context={'username': username})
 
 
 # 注册
@@ -19,7 +19,7 @@ def register(request):
         phone = request.POST.get('mobile')
         user = Users.objects.filter(Users.user_phone == phone).first()
         if user:
-            return render(request, 'common/new_file.html', context={'msg': '用户已存在'})
+            return render(request, 'index.html', context={'msg': '用户已存在'})
         else:
             Users.register(request)
             request.session['username'] = phone

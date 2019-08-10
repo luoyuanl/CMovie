@@ -56,7 +56,7 @@ class Filmpf(models.Model):
     filmpf_id = models.AutoField(primary_key=True)
     total_pf = models.IntegerField(blank=True, null=True)
     daily_pf = models.IntegerField(blank=True, null=True)
-    film_rating = models.IntegerField(blank=True)  # 电影评分
+    film_rating = models.FloatField(blank=True)  # 电影评分
     film_ratingcount = models.IntegerField(blank=True)  # 评分人数
     film_want = models.IntegerField(default=0,blank=True)
     film = models.OneToOneField(to=Films, on_delete=models.CASCADE,db_column='film_id',related_name='filmpf')
