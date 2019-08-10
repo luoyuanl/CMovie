@@ -37,11 +37,11 @@ def login(request):
             # response.set_cookie('username', phone, max_age=MAXAGE)
             # 写入session
             request.session['username'] = phone
-            return render(request, '影片列表.html')
+            return render(request, '电影-正在热映1.html')
         else:
             return render(request, 'index.html', context={'msg': '用户名或密码错误'})
     else:
-        return render(request, '登录.html')
+        return render(request, '登录 1.html')
 
 
 # 退出登录
@@ -68,7 +68,7 @@ def userorder(request):
 # 订票
 def orderticket(request):
     if request.method == 'GET':
-        return render(request, '选座.html')
+        return render(request, '选座1.html')
     else:
         pass
 
