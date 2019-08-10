@@ -12,35 +12,40 @@ def index(request):
     # 即将上映
     films_coming = Films.objects.filter(film_status=1).all()[0:9]
     # 热播电影
-    films_hot = Films.objects.filter(film_status=1).order_by('film_rating').all()[0:9]
+    films_hot = Films.objects.filter().order_by('-filmpf__total_pf').all()[0:9]
+    # 今日票房
+    films_pf = Films.objects.filter(film_status=0).order_by('-filmpf__daily_pf').all()[0:11]
+    # 最受期待
+    films_want = Films.objects.filter(film_status=1).order_by('-filmpf__film_want').all()[0:11]
     # top100
-    films_rank = Filmpf.objects.all().order_by()[0:11]
-    # 票房排名
-    films_pf = Films.objects
+    films_rank = Films.objects.all().order_by('-filmpf__film_rating').all()[0:11]
+
     return render(request, 'index.html', context={
         'title': '首页',
         'films_showing': films_showing,
         'films_coming': films_coming,
         'films_hot': films_hot,
+        'films_pf':films_pf,
+        'films_want':films_want,
         'films_rank': films_rank,
     })
 
 # 榜单
 def ranking(request):
     # 热映口碑榜
-    rank_hot = Films.objects.filter(film_status=0).all()[0:11]
+    films_hot = Films.objects.filter(film_status=0).order_by('-filmpf__total_pf').all()[0:9]
+    # 最受期待榜
+    films_want = Films.objects.filter(film_status=1).order_by('-filmpf__film_want').all()[0:11]
     # 票房榜
-    rank_pf = Films.objects.filter(film_status=0).all()
-    rank_pf_li = []
-    for film in rank_pf:
-        film_pf = Filmpf.objects.order_by('total_pf').all()[0:11]
-        rank_pf_li.append([film,film_pf])
-    rank_top = Films
+    films_pf = Films.objects.filter().order_by('-filmpf__total_pf').all()[0:9]
+    # top100榜
+    films_rank = Films.objects.all().order_by('-filmpf__film_rating').all()
     return render(request, 'index.html', context={
         'title': '榜单',
-        'rank_hot': rank_hot,
-        'rank_pf': rank_pf,
-
+        'films_hot': films_hot,
+        'films_want':films_want,
+        'films_pf':films_pf,
+        'films_rank':films_rank,
     })
 
 
