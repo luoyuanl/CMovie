@@ -134,3 +134,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # 设置3天过期
 MAXAGE = 3 * 24 * 3600
 SALTVALUE = 'c2603127-be80-49e6-aa8f-cb732f69c066'
+
+
+# 短信配置
+
+
+# 分页配置

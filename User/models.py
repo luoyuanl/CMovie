@@ -75,15 +75,3 @@ class Users(models.Model):
     # 给电影评分
     def mark(self):
         pass
-
-
-# 评论表
-class FilmComments(models.Model):
-    # 评论id，影片id，评论内容，评论人id，评论日期,点赞数,是否显示
-    comment_id = models.CharField(max_length=20)  # 影片id+评论时间
-    comment_filmid = models.IntegerField(null=False)  # 影片名，对应影片表
-    comment_content = models.CharField(max_length=3000)
-    comment_userid = models.IntegerField  # 评论人，对应用户表
-    comment_datetime = models.DateTimeField
-    comment_likenum = models.IntegerField
-    comment_isdel = models.IntegerField

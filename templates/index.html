@@ -15,9 +15,21 @@
     </label>密码
     <input type="submit">
 </form>
+{% for film in films_showing %}
+    <div>
+    {{ film.film_namech }} 中文名
+    {{ film.film_rating }}  评分
+    {{ film.film_releasdate }}  上映日期
+    </div>
+{% endfor %}
 
-<h1>
-</h1>
+{% for film in films_coming %}
+    <h1>{{ film.film_namech }}----{{ film.film_id }}</h1>
+{% endfor %}
+
+{% for film in films_hot %}
+    <h1>{{ film.film_namech }}----{{ film.film_id }}</h1>
+{% endfor %}
 
 </body>
 

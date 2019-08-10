@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # 影院表
 # 影院id，影院名，地址，电话，照片，营业状态
 class Cinemas(models.Model):
@@ -21,21 +20,21 @@ class Halls(models.Model):
     hall_id = models.AutoField(primary_key=True)
     hall_name = models.CharField(max_length=60)
     hall_type = models.CharField(max_length=128)
-    hall_seatscount = models.IntegerField
-    hall_cinemaid = models.IntegerField  # 所属影院，关联影院表
+    hall_seatscount = models.IntegerField(null=True)
+    hall_cinemaid = models.IntegerField(null=True)  # 所属影院，关联影院表
 
 
 # 排片表
 # 场次id，日期，开始时间，结束时间，影厅id，影片id，语言版本，票价
 class Schedule(models.Model):
     skd_id = models.AutoField(primary_key=True)
-    skd_date = models.DateField
-    skd_starttime = models.TimeField
-    skd_endtime = models.TimeField
-    skd_hallid = models.IntegerField
-    skd_filmid = models.IntegerField
+    skd_date = models.DateField(null=True)
+    skd_starttime = models.TimeField(null=True)
+    skd_endtime = models.TimeField(blank=True,null=True)
+    skd_hallid = models.IntegerField(null=True)
+    skd_filmid = models.IntegerField(null=True)
     skd_language = models.CharField(max_length=20)
-    skd_price = models.IntegerField
+    skd_price = models.IntegerField(null=True)
 
 
 # 座位锁定表
@@ -45,9 +44,9 @@ class Seatlock(models.Model):
     lktype = ((0, '可选'), (1, '锁定未支付'), (2, '已支付'))
 
     lock_id = models.AutoField(primary_key=True)
-    lock_skdid = models.IntegerField  # 排片id
-    lock_orderid = models.IntegerField
-    lock_seatnum = models.IntegerField
+    lock_skdid = models.IntegerField(null=True)  # 排片id
+    lock_orderid = models.IntegerField(null=True)
+    lock_seatnum = models.IntegerField(null=True)
     lock_time = models.TimeField(auto_now_add=True)
     lock_type = models.IntegerField(choices=lktype, default=0)
 
@@ -61,15 +60,15 @@ class Order(models.Model):
     order_id = models.AutoField(primary_key=True)  # 场次号+下单时间+用户id
     order_num = models.CharField(max_length=20)
     order_datetime = models.DateTimeField(auto_now_add=True)
-    order_userid = models.IntegerField
-    order_skdid = models.IntegerField
-    order_seat1 = models.IntegerField
-    order_seat2 = models.IntegerField(blank=True)
-    order_seat3 = models.IntegerField(blank=True)
+    order_userid = models.IntegerField(null=True)
+    order_skdid = models.IntegerField(null=True)
+    order_seat1 = models.IntegerField(null=True)
+    order_seat2 = models.IntegerField(null=True)
+    order_seat3 = models.IntegerField(null=True)
     order_seat4 = models.IntegerField(blank=True)
     order_seat5 = models.IntegerField(blank=True)
-    order_prices = models.IntegerField
-    order_status = models.IntegerField
+    order_prices = models.IntegerField(null=True)
+    order_status = models.IntegerField(null=True)
 
 
 # 影院管理员，手机号或邮箱登录
@@ -83,5 +82,5 @@ class CinemaAdmin(models.Model):
     Admin_phone = models.CharField(max_length=20)
     Admin_email = models.CharField(max_length=100,blank=True)
     Admin_name = models.CharField(max_length=60,blank=True)
-    Admin_cinemaid = models.IntegerField
+    Admin_cinemaid = models.IntegerField(null=True)
     Admin_type = models.IntegerField(choices=admtype, default=0)
