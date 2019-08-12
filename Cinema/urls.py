@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^schedule/', views.schedule, name='schedule'),
     url(r'^orderlist/', views.orderlist, name='orderlist'),
     url(r'^orderdetail/', views.orderdetail, name='index'),
+    url(r'^upload/',views.upload,name='upload'),
 ]

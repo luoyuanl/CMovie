@@ -1,5 +1,9 @@
+import os
+
 from django.contrib.auth.hashers import make_password, check_password
 from django.db import models
+
+from CMovie import settings
 
 
 # 用户表
@@ -14,7 +18,7 @@ class Users(models.Model):
     user_gender = models.IntegerField(choices=gender, default=1)
     user_birthday = models.DateField(blank=True, null=True)
     user_signature = models.CharField(max_length=200, blank=True)
-    user_photo = models.ImageField(max_length=256, null=True)
+    user_photo = models.ImageField(upload_to='userphoto',null=True)
     user_email = models.CharField(max_length=100, blank=True)
     user_regtime = models.DateTimeField(auto_now_add=True)
 
@@ -55,6 +59,31 @@ class Users(models.Model):
     # 修改个人信息
     def changeinfo(self):
         pass
+
+    # 检验上传文件类型
+    @staticmethod
+    def check_file_type(filename):
+        """
+        判断上传文件是否是指定类型
+        :param filename: 上传文件名
+        :return:
+        """
+        ext = os.path.splitext(filename)
+        if ext and len(ext) > 1:
+            ext = ext[1].strip('.')
+        else:
+            return False
+        return ext.lower() in ['png', 'jpg', 'jpeg', 'gif']
+
+    # 检验上传文件大小
+    @staticmethod
+    def check_file_size(filesize):
+        """
+
+        :param filesize:
+        :return:
+        """
+        return filesize < settings.MAX_FILE_SIZE
 
     # 订票
     def orderticket(self):

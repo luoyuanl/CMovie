@@ -79,6 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'CMovie',
         # 'HOST': '192.168.249.200',
+        # 'HOST':'192.168.1.10',
         'HOST': '10.0.108.41',
         'USER': 'root',
         'PASSWORD': '524107',
@@ -128,15 +129,34 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# 静态资源目录
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# 文件上传路径
+MEDIA_ROOT = [os.path.join(BASE_DIR, 'static/upload')]
+# 上传文件最大2M
+MAX_FILE_SIZE = 2 * 1024 * 1024
 
 # COOKIE,session
 # 设置3天过期
 MAXAGE = 3 * 24 * 3600
 SALTVALUE = 'c2603127-be80-49e6-aa8f-cb732f69c066'
 
-
 # 短信配置
+SMSCONFIG = {
+    'ACCESS_KEY_ID': "LTAIdpnzZqVdDNUe",
+    'ACCESS_KEY_SECRET': "R5i2C5WwbqOdDMxo2ht4EggYoVFtlF",
+    'SignName': "CMovie",
+    'TemplateCode': "SMS_172223614"
 
+}
+# 邮箱配置
+EMALIL_HOST = 'smtp.163.com'
+EMALIL_POTR = '25'
+EMALI_HOST_USER = 'luoyuan_l@163.com'
+EMAIL_HOST_PASSWORD = 'web0805'
+EMAIL_FROM = 'CMovie<luoyuan_l@163.com>'
 
 # 分页配置
+COUNTOFPAGE = 10
+PAGERANGE = 10

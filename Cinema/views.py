@@ -1,5 +1,8 @@
-from django.shortcuts import render
+import os
 
+from django.http import HttpResponse
+from django.shortcuts import render
+from CMovie.settings import BASE_DIR
 
 # 主页,营收情况
 def index(request):
@@ -35,3 +38,10 @@ def orderlist(request):
 def orderdetail(request):
     pass
 
+# 上传图片
+def upload(request):
+    path = request.path.split('/')
+    path = os.path.join(BASE_DIR,path)
+    with open(path) as fp:
+        data = fp.read()
+    return HttpResponse(data)

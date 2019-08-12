@@ -13,7 +13,7 @@ class Films(models.Model):
     film_actor1 = models.CharField(max_length=60, blank=True, null=True)  # 与演员表对应
     film_actor2 = models.CharField(max_length=60, blank=True, null=True)
     film_actor3 = models.CharField(max_length=60, blank=True, null=True)
-    film_photo = models.CharField(max_length=256, blank=True, null=True)  # 海报路径，与图集对应
+    film_photo = models.ImageField(upload_to='filmphoto', blank=True, null=True)  # 海报路径，与图集对应
     film_director = models.CharField(max_length=60, blank=True, null=True)  # 导演
 
     # 展示影片概况
@@ -62,21 +62,21 @@ class Filmpf(models.Model):
     film = models.OneToOneField(to=Films, on_delete=models.CASCADE,db_column='film_id',related_name='filmpf')
 
 
-    class Category(models.Model):
-        cgy_id = models.AutoField(primary_key=True)
-        cgy_pid = models.IntegerField(default=0)
-        cgy_name = models.CharField(max_length=30)
+class Category(models.Model):
+    cgy_id = models.AutoField(primary_key=True)
+    cgy_pid = models.IntegerField(default=0)
+    cgy_name = models.CharField(max_length=30)
 
-    # 评论表
-    class FilmComments(models.Model):
-        # 评论id，影片id，评论内容，评论人id，评论日期,点赞数,是否显示
-        comment_id = models.CharField(max_length=20)  # 影片id+评论时间
-        filmid = models.IntegerField(null=False)  # 影片名，对应影片表
-        comment_content = models.CharField(max_length=3000)
-        comment_userid = models.IntegerField(null=True)  # 评论人，对应用户表
-        comment_datetime = models.DateTimeField(auto_now_add=True)
-        comment_likenum = models.IntegerField(default=0)
-        comment_isdel = models.IntegerField(default=0)
+# 评论表
+class FilmComments(models.Model):
+    # 评论id，影片id，评论内容，评论人id，评论日期,点赞数,是否显示
+    comment_id = models.CharField(max_length=20)  # 影片id+评论时间
+    filmid = models.IntegerField(null=False)  # 影片名，对应影片表
+    comment_content = models.CharField(max_length=3000)
+    comment_userid = models.IntegerField(null=True)  # 评论人，对应用户表
+    comment_datetime = models.DateTimeField(auto_now_add=True)
+    comment_likenum = models.IntegerField(default=0)
+    comment_isdel = models.IntegerField(default=0)
 
 # 演员表
 

@@ -27,7 +27,7 @@ def index(request):
     films_rank = Films.objects.all().order_by('-filmpf__film_rating').all()[1:9]
     # session
     username = request.session.get('username')
-    return render(request, 'index.html', context={
+    return render(request, '首页1.html', context={
         'title': '首页',
         'films_showing': films_showing,
         'showing_count': showing_count,
@@ -37,8 +37,8 @@ def index(request):
         'films_hot': films_hot,
         'films_pf1': films_pf1,
         'films_pf': films_pf,
-        'films_wangt1': films_want1,
-        'films_wangt23': films_want23,
+        'films_want1': films_want1,
+        'films_want23': films_want23,
         'films_want': films_want,
         'films_rank1': films_rank1,
         'films_rank': films_rank,
