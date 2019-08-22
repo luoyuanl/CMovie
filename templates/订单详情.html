@@ -1,0 +1,97 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block css1 %}
+    <link rel="stylesheet" href="{% static 'css/common.0a548310.css' %}">
+    <link rel="stylesheet" href="{% static 'css/order-detail.3a8a0a18.css' %}">
+{% endblock css1 %}
+
+{% block content %}
+    <div class="container" id="app">
+        {% for order in orders %}
+            <div class="order-container" data-page-type="detail" data-order-id="{{ order.order_id }}" data-unique-status="10">
+                <div class="status-box finished">
+                    <p class="title">{{ order.order_status }}</p>
+                    <p class="desc"></p>
+                </div>
+                <div class="order-note">
+                    <span class="order-id">订单号：{{ order.order_num }}</span>
+{#                    <span class="contact">（有订单问题可拨打猫眼客服电话<i>1010-5335</i>，工作时间: 9:00-24:00）</span>#}
+                </div>
+
+                <table class="order-table">
+                    <thead>
+                    <tr>
+                        <th>影片</th>
+                        <th>时间</th>
+                        <th>影院</th>
+                        <th>座位</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="movie-name">《{{ order.film_namech }}》</td>
+                        <td class="showtime">{{ order.skd_date }}{{ order.skd_starttime }}</td>
+                        <td class="cinema-name">{{ order.cinema_name }}</td>
+                        <td>
+                            <span class="hall">{{ order.hall_name }}</span>
+                            <div class="seats">
+                                <div>
+                                    <span class=""><i>9</i>排<i>4</i>座</span>
+                                </div>
+                                <div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <div class="order-bottom">
+                    <div class="clearfix">
+                        <div class="cinema-info">
+                            <p class="name">{{ order.cinema_name }}</p>
+                            <p class="address">地址: {{ order.cinema_addr }}</p>
+                            <p class="phone">电话: {{ order.cinema_phone }}</p>
+                        </div>
+
+                        <div class="price-box">
+                            <span>总价:</span>
+                            <span class="price">{{ order.order_prices }}</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-container" style="display:none">
+                <div class="modal">
+                    <span class="icon"></span>
+                    <p class="tip">支付超时，该订单已失效，请重新购买</p>
+                    <div class="ok-btn btn">我知道了</div>
+                </div>
+            </div>
+
+            <form name="cashierForm" method="post" action="https://mpay.meituan.com/cashier/pc/index">
+                <input type="hidden" name="token" value="">
+                <input type="hidden" name="tradeno" value="">
+                <input type="hidden" name="pay_token" value="">
+                <input type="hidden" name="website" value="mtmaoyan">
+                <input type="hidden" name="pay_success_url" value="http://www.maoyan.com/order/result/552119156">
+                <input type="hidden" name="nb_platform" value="www">
+                <input type="hidden" name="nb_source" value="cashier-pcforcustomer">
+            </form>
+
+
+            <div class="modal-container" style="display:none">
+                <div class="modal">
+                    <span class="icon"></span>
+
+                    <p class="tip"></p>
+
+                    <div class="ok-btn btn">我知道了</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

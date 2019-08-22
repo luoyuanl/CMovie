@@ -1,285 +1,200 @@
-<!DOCTYPE html>
-<!-- saved from url=(0148)https://passport.meituan.com/account/unitivesignup?service=maoyan&continue=https%3A%2F%2Fmaoyan.com%2Fpassport%2Flogin%3Fredirect%3D%252Fboard%252F4 -->
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script async="" src="./注册 _ 猫眼电影_files/saved_resource"></script>
-    <script>window.env = ''</script>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="dns-prefetch" href="https://s0.meituan.net/">
-    <link rel="apple-touch-icon" href="https://s0.meituan.net/img/apple-touch-icon-ipad.png">
-    <link rel="shortcut icon" href="https://p0.meitua.net/travelcube/ba8ffd9e91ba069f1d6cd352cd5b9e93803.png">
-    <link rel="icon" href="https://p0.meituan.net/travelcube/ba8ffd9e91ba069f1d6cd352cd5b9e93803.png"
-          sizes="16x16 32x32">
-    <link rel="alternate" href="http://www.meituan.com/feed" title="订阅更新" type="application/rss+xml">
-
-    <link rel="canonical"
-          href="https://passport.meituan.com/account/unitivesignup?service=maoyan&amp;continue=https%3A%2F%2Fmaoyan.com%2Fpassport%2Flogin%3Fredirect%3D%252Fboard%252F4">
-    <meta name="keywords" content="美团,登录,注册,美团登录,美团注册">
-
-    <title>注册 | 猫眼电影</title>
-    <!--[if lt IE 9]>
-        <script src="//s0.meituan.net/bs/jsm/?f&#x3D;fe-sso-fs:build/page/vendor/html5shiv.min.js"></script>
-    <![endif]-->
-
-    <link rel="stylesheet" type="text/css" href="../static/js/saved_resource(1)">
-
-
-    <script>
-        !function (e, t, n) {
-            function s() {
-                var e = t.createElement("script");
-                e.async = !0, e.src = "//s0.meituan." + (-1 === t.location.protocol.indexOf("https") ? "net" : "com") + "/bs/js/?f=mta-js:mta.min.js";
-                var n = t.getElementsByTagName("script")[0];
-                n.parentNode.insertBefore(e, n)
-            }
-
-            if (e.MeituanAnalyticsObject = n, e[n] = e[n] || function () {
-                (e[n].q = e[n].q || []).push(arguments)
-            }, "complete" === t.readyState) s(); else {
-                var i = "addEventListener", r = "attachEvent";
-                if (e[i]) e[i]("load", s, !1); else if (e[r]) e[r]("onload", s); else {
-                    var a = e.onload;
-                    e.onload = function () {
-                        s(), a && a()
-                    }
-                }
-            }
-        }(window, document, "mta"), function (e, t, n) {
-            if (t && !("_mta" in t)) {
-                t._mta = !0;
-                var s = e.location.protocol;
-                if ("file:" !== s) {
-                    var i = e.location.host, r = t.prototype.open;
-                    t.prototype.open = function (t, n, a, o, l) {
-                        if (this._method = "string" == typeof t ? t.toUpperCase() : null, n) {
-                            if (0 === n.indexOf("http://") || 0 === n.indexOf("https://") || 0 === n.indexOf("//")) this._url = n; else if (0 === n.indexOf("/")) this._url = s + "//" + i + n; else {
-                                var h = s + "//" + i + e.location.pathname;
-                                h = h.substring(0, h.lastIndexOf("/") + 1), this._url = h + n
-                            }
-                            var u = this._url.indexOf("?");
-                            -1 !== u ? (this._searchLength = this._url.length - 1 - u, this._url = this._url.substring(0, u)) : this._searchLength = 0
-                        } else this._url = null, this._searchLength = 0;
-                        return this._startTime = (new Date).getTime(), r.apply(this, arguments)
-                    };
-                    var a = "onreadystatechange", o = "addEventListener", l = t.prototype.send;
-                    t.prototype.send = function (t) {
-                        function n(n, i) {
-                            if (0 !== n._url.indexOf(s + "//frep.meituan.net/_.gif")) {
-                                var r;
-                                if (n.response) switch (n.responseType) {
-                                    case"json":
-                                        r = JSON && JSON.stringify(n.response).length;
-                                        break;
-                                    case"blob":
-                                    case"moz-blob":
-                                        r = n.response.size;
-                                        break;
-                                    case"arraybuffer":
-                                        r = n.response.byteLength;
-                                    case"document":
-                                        r = n.response.documentElement && n.response.documentElement.innerHTML && n.response.documentElement.innerHTML.length + 28;
-                                        break;
-                                    default:
-                                        r = n.response.length
-                                }
-                                e.mta("send", "browser.ajax", {
-                                    url: n._url,
-                                    method: n._method,
-                                    error: !(0 === n.status.toString().indexOf("2") || 304 === n.status),
-                                    responseTime: (new Date).getTime() - n._startTime,
-                                    requestSize: n._searchLength + (t ? t.length : 0),
-                                    responseSize: r || 0
-                                })
-                            }
-                        }
-
-                        if (o in this) {
-                            var i = function (e) {
-                                n(this, e)
-                            };
-                            this[o]("load", i), this[o]("error", i), this[o]("abort", i)
-                        } else {
-                            var r = this[a];
-                            this[a] = function (t) {
-                                r && r.apply(this, arguments), 4 === this.readyState && e.mta && n(this, t)
-                            }
-                        }
-                        return l.apply(this, arguments)
-                    }
-                }
-            }
-        }(window, window.XMLHttpRequest, "mta");
-
-        mta("create", "56b169118135d3e3104fdd0f");
-        mta("send", "page");
-    </script>
-    <script>
-        // 引入上报模块并配置  强烈建议放在head内，在其他JS、CSS等资源,JS代码之前
-        // http://docs.sankuai.com/doc/f2e_dp/owl/guide/
-        "use strict";
-        !function () {
-            var e = 0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : "_Owl_", a = window;
-            a[e] || (a[e] = {
-                isRunning: !1,
-                isReady: !1,
-                preTasks: [],
-                dataSet: [],
-                pageData: [],
-                disableMutaObserver: !1,
-                observer: null,
-                use: function (e, t) {
-                    this.isReady && a.Owl && a.Owl[e](t), this.preTasks.push({api: e, data: [t]})
-                },
-                add: function (e) {
-                    this.dataSet.push(e)
-                },
-                run: function () {
-                    var t = this;
-                    if (!this.isRunning) {
-                        this.isRunning = !0;
-                        var e = a.onerror;
-                        a.onerror = function () {
-                            this.isReady || this.add({type: "jsError", data: arguments}), e && e.apply(a, arguments)
-                        }.bind(this), (a.addEventListener || a.attachEvent)("error", function (e) {
-                            t.isReady || t.add({type: "resError", data: [e]})
-                        }, !0);
-                        var i = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver,
-                            r = window.performance || window.WebKitPerformance;
-                        if (i && r) {
-                            var n = -1, s = window.navigator.userAgent;
-                            if (-1 < s.indexOf("compatible") && -1 < s.indexOf("MSIE") ? (new RegExp("MSIE (\\d+\\.\\d+);").test(s), n = parseFloat(RegExp.$1)) : -1 < s.indexOf("Trident") && -1 < s.indexOf("rv:11.0") && (n = 11), -1 !== n && n <= 11) return void (this.disableMutaObserver = !0);
-                            try {
-                                this.observer = new i(function (e) {
-                                    t.pageData.push({mutations: e, startTime: r.now()})
-                                }), this.observer.observe(document, {childList: !0, subtree: !0})
-                            } catch (e) {
-                                console.log("mutationObserver err")
-                            }
-                        } else this.disableMutaObserver = !0
-                    }
-                }
-            }, a[e].run())
-        }();
-    </script>
-</head>
-
+{% extends 'common/base.html' %}
+{% load static %}
+    <title>{{ title }}</title>
+{% block css1 %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.d0f96cc2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrapValidator.css' %}">
+    <style>
+    .form-group{
+        width: 50%;
+    }
+    </style>
+{% endblock css1 %}
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>#}
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrapValidator.min.js' %}"></script>
+<script>if (window.devicePixelRatio >= 2) {
+    document.write('<link rel="stylesheet" href="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/image-2x.8ba7074d.css"/>')
+}
+</script>
+{% endblock js %}
+{% block js2 %}
+{% endblock js2 %}
+{% block header %}
+{% endblock header %}
+{% block content %}
 <body class="pg-unitive-signup theme--maoyan">
-
 <header class="header--mini">
     <div class="wrapper cf">
-        <a class="site-logo" href="http://www.maoyan.com/">美团</a>
+        <a class="site-logo" href=""></a>
     </div>
 </header>
-<div class="content">
-    <div class="J-unitive-signup-form">
-
-        <div class="sheet" style="display:block">
-            <form action="{% url 'user:register' %}" method="POST">
-                <div class="form-field form-field--mobile">
-                    <label>手机号</label>
-                    <input type="text" name="mobile" class="f-text J-mobile">
-                    <span class="J-unitive-tip unitive-tip">注册成功后，全美团通用</span>
-                </div>
-                <div class="form-field form-field--vbtn">
-                    <label>图片验证码</label>
-                    <div class="J-captcha captcha-wrapper" style="display:none" hidden="true">
-                        <input type="text" id="captcha-mobile" class="f-text J-captcha" name="captcha-mobile"
-                               autocomplete="off">
-                        <img id="signup-captcha-mobile-img" height="34px" width="60px"
-                             class="signup-captcha-img J-captcha-refresh" src="./注册 _ 猫眼电影_files/captcha">
-                        <a tabindex="-1" class="J-captcha-refresh captcha-refresh inline-link"
-                           href="javascript:void(0)">看不清楚？换一张</a>
-                        <span class="J-captcha-tip inline-tip"></span>
-                    </div>
-                    <div class="verify-wrapper">
-                        <input type="button" class="btn-normal btn-mini verify-btn J-verify-btn" value="免费获取短信动态码">
-                        <span class="f1 verify-tip" id="J-verify-tip"></span>
-                    </div>
-
-
-                </div>
-                <div class="form-field form-field--sms">
-                    <label>短信动态码</label>
-
-                    <input type="text" name="verifycode" class="f-text J-sms">
-
-
-                </div>
-                <div class="form-field form-field--pwd">
-                    <div class="pw-strength">
-                        <div class="pw-strength__bar" id="J-pw-strength__bar"></div>
-                        <div class="pw-strength__letter">
-                            <span class="pw-strength__label">弱</span>
-                            <span class="pw-strength__label">中</span>
-                            <span class="pw-strength__label pw-strength__label--noborder">强</span>
-                        </div>
-                    </div>
-                    <label>创建密码</label>
-
-                    <input type="password" name="password" class="f-text J-pwd">
-
-
-                </div>
-                <div class="form-field form-field--pwd2">
-                    <label>确认密码</label>
-
-                    <input type="password" name="password2" class="f-text J-pwd2">
-
-
-                </div>
-                <div class="slider-verify-wrapper" style="display:none">
-                    <div class="slider-verify-pop-bg"></div>
-                    <div id="slider-verify"></div>
-                </div>
-                <div class="form-field">
-                    <input data-mtevent="signup.submit" type="submit" name="commit" class="btn" value="同意以下协议并注册">
-                    <a href="https://passport.meituan.com/account/unitivesignup?service=maoyan&amp;continue=https%3A%2F%2Fmaoyan.com%2Fpassport%2Flogin%3Fredirect%3D%252Fboard%252F4"
-                       target="_blank"></a>
-                </div>
-                <input type="hidden" name="fingerprint" class="J-fingerprint" value="0-0-1-">
-            </form>
+<div class="content" style="position: relative;margin: auto">
+     <form id="registerForm" method="POST" class="form-horizontal" action="{% url 'user:register' %}">
+         {% csrf_token %}
+         <div class="form-group">
+            <label class="control-label" for="phone">*请输入手机号码:</label>
+            <input type="text" class="form-control" placeholder="" name="phone" id="phone">
+         </div>
+         <div class="form-group">
+             <input type="submit" class="btn-normal btn-mini" value="免费获取短信动态码" id="sendsms" name="sendsms">
+         </div>
+         <div class="form-group">
+            <label class="control-label" for="phonecode">*请输入手机验证码:</label>
+            <input type="text" class="form-control" placeholder="" name="phonecode" id="phonecode">
+         </div>
+         <div class="form-group">
+        <!--注册密码-->
+            <label class="control-label" for="password">*请输入密码:</label>
+            <input type="password" class="form-control" placeholder="请输入注册密码" name="password" id="password">
         </div>
+         <div class="form-group">
+                <!--确认密码-->
+                <label class="control-label" for="repassword">*请确认密码:</label>
+                <input type="password" class="form-control" placeholder="请输入确认密码" name="repassword" id="repassword">
+         </div>
+         <div>
+             <a href="{% url 'user:login' %}">已有帐号,直接登录</a>
+         </div>
+         <div class="form-group">
+{#             <button type="submit" class="btn btn-primary form-control" id="submit">提交注册</button>#}
+             <input type="submit" class="btn btn-primary form-control" id="submit"/>
+         </div>
 
-    </div>
 
-
-    <div class="term">
-        <a class="f1" href="http://www.meituan.com/about/terms" target="_blank">《美团网用户协议》</a>
-    </div>
+     </form>
 </div>
+{% endblock %}
+{% block footjs %}
 
-<footer class="footer--mini">
-    <p class="copyright">
-        ©<a class="f1" href="https://www.meituan.com/">meituan.com</a>&nbsp;
-        <a class="f1" target="_blank" href="http://www.miibeian.gov.cn/">京ICP证070791号</a>&nbsp;
-        <span class="f1">京公网安备11010502025545号</span>
-    </p>
-</footer>
-
-<script>window.onunload = function () {
-};</script>
-
-<span id="csrf" style="display:none">XLphquWB-rZZLT6v7MpimLUGbbCtk7IWuzCE</span>
-<script src="../static/js/yoda.seed.js.下载"></script>
-<script src="../static/js/saved_resource(2)"></script>
-<script>
-    var isPreview = false;
-    var mtUnitLoginEnv = ''
+<script type="text/javascript">
+    $("#registerForm").bootstrapValidator({
+            feedbackIcons: {
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                phone: {
+                    validators: {
+                        message: '请输入11位手机号',
+                        notEmpty: {
+                            message: '手机号码不能为空'
+                        },
+                        stringlength: {
+                            min: 11,
+                            max: 11,
+                            message: '请输入11位手机号码'
+                        },
+                        regexp: {
+                            regexp: /^1[0-9]{10}$/,
+                            message: '请输入11位手机号码'
+                        },
+                    },
+                },
+                password: {
+                    message: '请输入密码',
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 20,
+                            message: '密码长度必须位于3到20之间'
+                        },
+                        identical: {
+                            field: 'password',
+                            message: '两次密码输入不一致'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9]+$/,
+                            message: '密码只能由数字字母组成'
+                        }
+                    }
+                },
+                repassword: {
+                    message: '请确认密码',
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 20,
+                            message: '密码长度必须位于3到20之间'
+                        },
+                        identical: {
+                            field: 'password',
+                            message: '两次密码输入不一致'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9]+$/,
+                            message: '密码由数字和字母组成'
+                        }
+                    }
+                },
+                phonecode: {
+                    validators: {
+                        notEmpty: {
+                            message: '验证码不能为空'
+                        },
+                        stringlength: {
+                            min: 6,
+                            max: 6,
+                            message: '请输入6位验证码'
+                        },
+                        regexp: {
+                            regexp: /^[\d]{6}$/,
+                            message: '请输入6位数字验证码'
+                        }
+                    }
+                },
+            },
+        });
+        $("#submit").click(function () {
+            if ($("#registerForm").data('bootstrapValidator').isValid()) {
+                $.ajax({
+                    cache:false,
+                    type:"POST",
+                    url:"{% url 'user:register' %}",
+                    data:{
+                        csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val(),
+                        phone:$("#phone").val(),
+                        phonecode:$("#phonecode").val(),
+                        password:$("#password").val(),
+                    },
+                    async:true,
+                    success:function (result) {
+                        alert(result);
+                        $('.content').html(result)
+                    }
+                })
+            }
+        });
 </script>
-<script src="../static/js/saved_resource(3)"></script>
-
 
 <script>
-    var Rohr_Opt = {
-        geo: false
-    }
+    $('#sendsms').click(function () {
+        $.ajax({
+            cache:false,
+            type:"POST",
+            url:"{% url 'user:sendsms' %}",
+            data:{
+                csrfmiddlewaretoken:$('[name="csrfmiddlewaretoken"]').val(),
+                phone:$("#phone").val()
+            },
+            async:true,
+            success:function (data) {
+                alert(data);
+            }
+        })
+    })
 </script>
-<script src="../static/js/default.js.下载"></script>
-
-
+{% endblock footjs %}
 </body>
 </html>
 

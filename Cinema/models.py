@@ -21,6 +21,8 @@ class Halls(models.Model):
     hall_id = models.AutoField(primary_key=True)
     hall_name = models.CharField(max_length=60)
     hall_type = models.CharField(max_length=128)
+    hall_rows = models.IntegerField(null=True)
+    hall_cols = models.IntegerField(null=True)
     hall_seatscount = models.IntegerField(null=True)
     hall_cinemaid = models.IntegerField(null=True)  # 所属影院，关联影院表
 
@@ -29,6 +31,7 @@ class Seats(models.Model):
     seat_id = models.AutoField(primary_key=True)
     seat_rowid = models.IntegerField()
     seat_colid = models.IntegerField()
+    seat_num = models.IntegerField()
     seat_ofhallid = models.IntegerField(null=True)
 
 
@@ -53,7 +56,7 @@ class Seatlocks(models.Model):
 
     lock_id = models.AutoField(primary_key=True)
     lock_skdid = models.IntegerField(null=True)  # 排片id
-    lock_orderid = models.IntegerField(null=True)
+    lock_orderid = models.CharField(max_length=20)
     lock_seatnum = models.IntegerField(null=True)
     lock_time = models.TimeField(auto_now_add=True)
     lock_type = models.IntegerField(choices=lktype, default=0)
@@ -65,10 +68,10 @@ class Orders(models.Model):
     # 订单状态：未支付，已取消，已支付
     status = ((0, '未支付'), (1, '已取消'), (2, '已完成'))
 
-    order_id = models.AutoField(primary_key=True)  # 场次号+下单时间+用户id
+    order_id = models.AutoField(primary_key=True)
     order_num = models.CharField(max_length=20)
     order_datetime = models.DateTimeField(auto_now_add=True)
-    order_userphone = models.CharField(max_length=60,null=True)
+    order_userphone = models.CharField(max_length=60, null=True)
     order_skdid = models.IntegerField(null=True)
     order_seat1 = models.IntegerField(null=True)
     order_seat2 = models.IntegerField(null=True)
@@ -76,7 +79,7 @@ class Orders(models.Model):
     order_seat4 = models.IntegerField(null=True)
     order_seat5 = models.IntegerField(null=True)
     order_prices = models.IntegerField(null=True)
-    order_status = models.IntegerField(null=True)
+    order_status = models.IntegerField(choices=status, null=True)
 
 
 # 影院管理员，手机号或邮箱登录

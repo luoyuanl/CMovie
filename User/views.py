@@ -2,63 +2,65 @@ import os
 import random
 from datetime import datetime
 
-from Cinema.models import Orders
+from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
+
+from Cinema.models import Orders, Seatlocks, Schedules, Halls, Cinemas
 from Film.models import Films
-from User.tools import send_sms
+from User.sms import send_sms
 from django.core.mail import send_mail
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from User.models import Users
 
 
-# 主页
-
-def index(request):
-    # 右上角用户登陆位置显示request.session['username'],为手机号
-    username = request.session.get('username')
-    return render(request, 'common/base.html', context={'username': username})
-
-
 # 注册
 def register(request):
     if request.method == 'POST':
-        phone = request.POST.get('mobile')
+        phone = request.POST['phone']
         user = Users.objects.filter(user_phone=phone).first()
         if user:
-            return HttpResponse('用户已存在')
+            # return render(request, '注册 _ 猫眼电影.html', context={'title': '注册', 'msg': '账号已注册，请直接登录'})
+            return render(request, '登录 1.html', context={'title': '登录'})
         else:
-            verifycode = request.POST.get('verifycode')
-            if verifycode == request.session['code']:
+            phonecode = int(request.POST['phonecode'])
+            print(phonecode)
+            if phonecode == request.session['code']:
                 Users.register(request)
                 request.session['username'] = phone
+                user = Users.objects.filter(user_phone=phone).first()
+                request.session['user_id'] = user.user_id
+                return redirect(reverse('film:index'))
             else:
-                return HttpResponse('验证码输入有误')
-            return render(request, 'index.html')
+                return render(request, '注册 _ 猫眼电影.html', context={'title': '注册', 'msg': '验证码有误，请重新输入'})
     else:
-        return render(request, 'index.html')
+        return render(request, '注册 _ 猫眼电影.html', context={'title': '注册'})
 
 
 # 发送验证码
-def sendsms(request, phone):
+def sendsms(request):
     code = random.randint(100001, 1000000)
-    send_sms(phone, {'number': '{}'.format(code)})
+    send_sms(request.POST['phone'], {'code': code})
+    print(code)
     request.session['code'] = code
+    return HttpResponse('验证码发送成功！')
 
 
 # 账号密码登录
-def normallogin(request):
+def login(request):
     if request.method == 'POST':
-        phone = request.POST.get('mobile')
-        password = request.POST.get('password')
+        phone = request.POST['phone']
+        password = request.POST['password']
         if Users.checklogin(phone, password):
             request.session['username'] = phone
-            return render(request, 'index.html')
+            return redirect(reverse('film:index'))
         else:
-            return render(request, 'index.html')
+            request.session['username'] = phone
+            return render(request, '登录 1.html', context={'title': '登录'})
     else:
-        return render(request, 'index.html')
+        return render(request, '登录 1.html', context={'title': '登录'})
 
 
 # 手机验证码登录
@@ -68,18 +70,21 @@ def phonelogin(request):
 
 # 退出登录
 def logout(request):
-    response = redirect(reverse('user:index'))
-    # 清除cookie
-    # response.delete_cookie('user_phone')
-
-    # 清除session
+    response = redirect(reverse('film:index'))
     request.session.flush()
     return response
 
 
 # 修改个人信息
 def myinfo(request):
-    pass
+    user = Users.objects.filter(user_phone=request.session['username']).first()
+    if request.method == 'POST':
+        user.user_nickname = request.POST['nickname']
+        user.user_gender = request.POST['gender']
+        user.user_signature = request.POST['signature']
+        user.user_birthday = request.POST['birthday']
+        user.save()
+    return render(request, '个人信息.html', context={'title': '个人信息', 'user': user})
 
 
 # 防止文件重名
@@ -105,22 +110,21 @@ def upload(request):
 # 查看个人订单
 def myorder(request):
     # return 订单号order_num，订单日期order_datetime，片名film_name，影院cinema_name，厅hall_name，座位seat_num，放映日期skd_date，时间skd_starttime，周几，海报film_phoho，总票价order_price
-    user = Users.objects.filter(user_phone=123).first()
+    user = Users.objects.filter(user_phone=request.session['username']).first()
+    print(user.user_gender)
     orders = Users.objects.raw(
-        "SELECT user_id,user_phone,order_num,order_datetime,order_status,order_seat1,order_seat2,order_seat3,order_seat4,order_prices,skd_date,skd_starttime,hall_name,film_namech,cinema_name,film_photo FROM User_users INNER JOIN Cinema_orders ON user_id = order_userid INNER JOIN Cinema_schedules ON order_skdid = skd_id INNER JOIN Cinema_halls ON skd_hallid = hall_id INNER JOIN Cinema_cinemas ON hall_cinemaid = cinema_id INNER JOIN Film_films ON skd_filmid = film_id WHERE user_id={}".format(
+        "SELECT user_id,user_phone,order_num,order_datetime,order_status,order_seat1,order_seat2,order_seat3,order_seat4,order_prices,skd_date,skd_starttime,hall_name,film_namech,cinema_name,film_photo FROM User_users INNER JOIN Cinema_orders ON user_phone = order_userphone INNER JOIN Cinema_schedules ON order_skdid = skd_id INNER JOIN Cinema_halls ON skd_hallid = hall_id INNER JOIN Cinema_cinemas ON hall_cinemaid = cinema_id INNER JOIN Film_films ON skd_filmid = film_id WHERE user_id={}".format(
             user.user_id))
-    return render(request, 'index.html', context={'title': '我的订单',
-                                                  'orders': orders})
+
+    return render(request, '订单.html', context={'title': '我的订单', 'orders': orders})
 
 
 # 订单详情
-def orderdetail(request):
-    # retunr 订单号order.order_num,
-    # order_num = request.GET.get('order_num')
-    order_num = 44443
+def orderdetail(request, order_num):
     orders = Orders.objects.raw(
-        "SELECT order_id,order_num,order_seat1,order_seat2,order_seat3,order_seat4,order_seat5,order_prices,skd_date,skd_starttime,hall_name,cinema_name,cinema_phone,cinema_addr,film_namech FROM Cinema_orders INNER JOIN Cinema_schedules ON order_skdid = skd_id INNER JOIN Cinema_halls ON Cinema_schedules.skd_hallid = Cinema_schedules.skd_hallid INNER JOIN Cinema_cinemas ON Cinema_halls.hall_cinemaid = Cinema_cinemas.cinema_id INNER JOIN Film_films ON skd_filmid = film_id WHERE order_num ={}".format(order_num))
-    return render(request, 'index.html', context={'title': '订单详情', 'orders': orders})
+        "SELECT order_id,order_num,order_seat1,order_seat2,order_seat3,order_seat4,order_seat5,order_prices,order_status,skd_date,skd_starttime,hall_name,cinema_name,cinema_phone,cinema_addr,film_namech FROM Cinema_orders INNER JOIN Cinema_schedules ON order_skdid = skd_id INNER JOIN Cinema_halls ON Cinema_schedules.skd_hallid = Cinema_schedules.skd_hallid INNER JOIN Cinema_cinemas ON Cinema_halls.hall_cinemaid = Cinema_cinemas.cinema_id INNER JOIN Film_films ON skd_filmid = film_id WHERE order_num ={}".format(
+            order_num))
+    return render(request, '订单详情.html', context={'title': '订单详情', 'orders': orders})
 
 
 # 订票
@@ -132,8 +136,50 @@ def orderticket(request):
 
 
 # 支付
+@csrf_exempt
 def payment(request):
-    pass
+    print(request.method)
+    if request.method == 'POST':
+        orderseats = request.POST.getlist('arr')
+        skdid = request.POST.get('skd')
+        skd = Schedules.objects.filter(skd_id=skdid).first()
+        film = Films.objects.filter(film_id=skd.skd_filmid).first()
+        userphone = request.session['username']
+        seatlocks = [int(i.strip('seat')) for i in orderseats]
+        seat = Seatlocks.objects.filter(lock_seatnum__in=seatlocks).all()
+        hall = Halls.objects.filter(hall_id=skd.skd_hallid).first()
+        cinema = Cinemas.objects.filter(cinema_id=1).first()
+        if seat:
+            print(111)
+            return redirect(reverse('film:seat'))
+        else:
+            print(222)
+            order_num = str(skdid) + datetime.now().strftime('%Y%m%d%H%M%S')
+            order_price = len(orderseats) * skd.skd_price
+            while len(seatlocks) < 5:
+                seatlocks.append(0)
+            order = Orders(order_num=order_num, order_userphone=userphone, order_skdid=skdid, order_status=0,
+                           order_seat1=seatlocks[0], order_seat2=seatlocks[1], order_seat3=seatlocks[2],
+                           order_seat4=seatlocks[3], order_seat5=seatlocks[4], order_prices=order_price)
+            order.save()
+            for i in seatlocks:
+                if i != 0:
+                    lockseat = Seatlocks(lock_type=1, lock_seatnum=i, lock_skdid=skdid, lock_orderid=order_num)
+                    lockseat.save()
+            print(333)
+        print(4444)
+        return render(request, '支付.html',
+                      context={'film': film, 'skd': skd, 'seats': seat, 'hall': hall, 'cinema': cinema, 'order': order})
+    else:
+        print(555)
+        return render(request, '支付.html',
+                      context={'title': '支付'})
+
+
+def test(request):
+    user = Users.objects.filter(user_phone='122').first()
+    print(user.user_gender)
+    return HttpResponse('ok')
 
 
 # 找回密码

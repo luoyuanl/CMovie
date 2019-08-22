@@ -23,7 +23,7 @@ class Users(models.Model):
     user_regtime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '{}----{}'.format(Users.user_phone, Users.user_password)
+        return '{}----{}'.format(Users.user_phone, Users.password)
 
     # 密码存成hash
     @property
@@ -37,8 +37,8 @@ class Users(models.Model):
     # 注册，写入数据库
     @staticmethod
     def register(request):
-        user = Users(use_phone=request.POST.get('mobile'),
-                     user_password=make_password(request.POST.get('password')))
+        user = Users(user_phone=request.POST['phone'],
+                     user_password=make_password(request.POST['password']))
         user.save()
 
     # 登录验证
@@ -46,14 +46,6 @@ class Users(models.Model):
     def checklogin(cls, phone, password):
         # 按用户名查询
         user = cls.objects.filter(user_phone=phone).first()
-        # if not user:
-        #     # 没注册
-        #     return False
-        # if not check_password(password,user.user_password):
-        #     # 密码错误
-        #     return False
-        # # 验证通过
-        # return True
         return user and check_password(password, user.user_password)
 
     # 修改个人信息

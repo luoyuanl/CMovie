@@ -1,6 +1,6 @@
-from django.test import TestCase
+from datetime import time, datetime
+seatlocks=[12,5,2,7,8,6]
+for index, num in enumerate(seatlocks):
+    s='{}'.format(index + 1)
 
-# Create your tests here.
 
-for i in range(1,101):
-    print('seatnum_{} = models.BooleanField(default=False)'.format(i))

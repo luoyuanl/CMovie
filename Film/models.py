@@ -1,5 +1,8 @@
-from django.db import models
+import json
 
+from django.db import models
+class Base:
+    pass
 
 # 影片概况
 # 影片id，中文片名,上映日期，上映状态，主演123，海报路径，评分，导演
@@ -44,28 +47,25 @@ class FilmsDetail(models.Model):
     film_country = models.CharField(max_length=200, blank=True, null=True)
     film_language1 = models.CharField(max_length=20, blank=True, null=True)
     film_language2 = models.CharField(max_length=20, blank=True, null=True)
-    film = models.OneToOneField(to=Films, on_delete=models.CASCADE,db_column='film_id',related_name='filmdetail')
-    # 函数
-
-    # 展示影片详细信息
-
+    film = models.OneToOneField(to=Films, on_delete=models.CASCADE, db_column='film_id', related_name='filmdetail')
 
 # 票房表
 class Filmpf(models.Model):
     # 票房id，所属电影id，总票房，今日票房，电影评分，评分人数，想看数
     filmpf_id = models.AutoField(primary_key=True)
-    total_pf = models.IntegerField(blank=True, null=True)
-    daily_pf = models.IntegerField(blank=True, null=True)
+    total_pf = models.FloatField(blank=True, null=True)
+    daily_pf = models.FloatField(blank=True, null=True)
     film_rating = models.FloatField(blank=True)  # 电影评分
     film_ratingcount = models.IntegerField(blank=True)  # 评分人数
-    film_want = models.IntegerField(default=0,blank=True)
-    film = models.OneToOneField(to=Films, on_delete=models.CASCADE,db_column='film_id',related_name='filmpf')
+    film_want = models.IntegerField(default=0, blank=True)
+    film = models.OneToOneField(to=Films, on_delete=models.CASCADE, db_column='film_id', related_name='filmpf')
 
 
 class Category(models.Model):
     cgy_id = models.AutoField(primary_key=True)
     cgy_pid = models.IntegerField(default=0)
     cgy_name = models.CharField(max_length=30)
+
 
 # 评论表
 class FilmComments(models.Model):

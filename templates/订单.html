@@ -1,0 +1,101 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block css1 %}
+    <link rel = "stylesheet" href = "{% static 'css/common.d0f96cc2.css' %}" >
+    <link rel = "stylesheet" href="{% static 'css/profile-profile.13d06bf4.css' %}">
+{% endblock css1 %}
+{% block content %}
+    <div class="container" id="app">
+    <div class="content">
+        <div class="main">
+            <div class="info-content clearfix">
+                <div class="user-profile-nav">
+                    <h1>个人中心</h1>
+                    <a href="{% url 'user:myorder' %}" class="orders active">我的订单</a>
+                    <a href="{% url 'user:myinfo' %}" class="profile ">基本信息</a>
+                </div>
+                <div class="orders-container">
+                    <div class="profile-title">我的订单</div>
+                    {% for order in orders %}
+                        <div class="order-box" data-orderid="{{ order.order_num }}">
+                            <div class="order-header">
+                                <span class="order-date">{{ order.order_date }}</span>
+                                <span class="order-id">订单号:{{ order.order_num }}</span>
+                                <span class="del-order" data-orderid="{{ order.order_num }}"></span>
+                            </div>
+
+                            <div class="order-body">
+                                <div class="poster">
+                                    <img src="/static/images/1.jpg" style="width: 66px;height: 91px">
+                                </div>
+                                <div class="order-content">
+                                    <div class="movie-name">《{{ order.film_namech }}》</div>
+                                    <div class="cinema-name">{{ order.cinema_name }}</div>
+                                    <div class="hall-ticket">
+                                        <span>{{ order.hall_name }}</span>
+                                        <span>{{ order.order_seat1 }}</span>
+                                    </div>
+                                    <div class="show-time">{{ order.order_datetime }}</div>
+                                </div>
+                                <div class="order-price">{{ order.order_prices }}</div>
+                                <div class="order-status">
+                                    {{ order.order_status  }}
+                                </div>
+                                <div class="actions">
+                                    <div>
+                                        {% ifequal order.order_status 0%}
+                                        <a href="https://maoyan.com/order/detail/21247410838" class="pay-btn"
+                                           data-act="orders-pay-click" data-bid="b_d2ll8ybm">付款</a>
+                                        {% endifequal %}
+                                        <a href="{% url 'user:orderdetail' order.order_num %}" class="order-detail"
+                                           data-act="orders-detail-click" data-bid="b_y190atas">查看详情</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="orders-pager">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mask3">
+        <div class="modal-container" style="display:none">
+            <div class="modal">
+                <span class="icon"></span>
+                <p class="tip">您确定要删除该订单嘛？删除后，不可恢复～</p>
+                <div class="short btn ok-btn">确定</div>
+                <div class="short btn cancel-btn">取消</div>
+            </div>
+        </div>
+    </div>
+    <div class="mask1">
+        <div class="modal-container" style="display:none">
+            <div class="modal">
+                <span class="icon"></span>
+                <p class="tip">请注意，注销账号会清空所有订单信息、影评、积分、<br>账户余额等信息且无法找回，是否继续？</p>
+                <div class="short btn ok-btn">确定</div>
+                <div class="short btn cancel-btn">取消</div>
+            </div>
+        </div>
+    </div>
+    <div class="mask2">
+        <div class="modal-container" style="display:none">
+            <div class="modal">
+                <span class="icon"></span>
+                <p class="tip">请联系客服10105335</p>
+                <div class="ok-btn btn">我知道了</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block footjs %}
+    <!--[if IE 8]><script crossorigin="anonymous" src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/es5-shim.bbad933f.js"></script>
+<![endif]-->
+<!--[if IE 8]><script crossorigin="anonymous" src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/es5-sham.d6ea26f4.js"></script>
+<![endif]-->
+<script crossorigin="anonymous" src="{% static 'js/common.5b26e1eb.js' %}"></script>
+<script crossorigin="anonymous" src="{% static 'js/profile-profile.59b4a3a3.js' %}"></script>
+{% endblock footjs%}

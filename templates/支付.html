@@ -1,0 +1,126 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block css1 %}
+    <link rel="stylesheet" href="{% static 'css/common.d0f96cc2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/order-confirm.598bbaa8.css' %}">
+{% endblock css1 %}
+{% block content %}
+    <div class="container" id="app">
+        <div class="order-progress-bar">
+            <div class="step first done">
+                <span class="step-num">1</span>
+                <div class="bar"></div>
+                <span class="step-text">选择影片场次</span>
+            </div>
+            <div class="step done">
+                <span class="step-num">2</span>
+                <div class="bar"></div>
+                <span class="step-text">选择座位</span>
+            </div>
+            <div class="step done">
+                <span class="step-num">3</span>
+                <div class="bar"></div>
+                <span class="step-text">14分钟内付款</span>
+            </div>
+            <div class="step last ">
+                <span class="step-num">4</span>
+                <div class="bar"></div>
+                <span class="step-text">影院取票观影</span>
+            </div>
+        </div>
+
+
+        <div class="count-down-wrapper">
+            <div class="count-down" data-payleftseconds="839">
+                <p class="time-left">
+                    请在
+                    <span class="minute">13</span>
+                    分钟
+                    <span class="second">41</span>秒内完成支付
+                </p>
+                <p class="tip">超时订单会自动取消，如遇支付问题，请致电猫眼客服：1010-5335</p>
+            </div>
+        </div>
+
+        <p class="warning">请仔细核对场次信息，出票后将<span class="attention">无法退票和改签</span></p>
+
+        <table class="order-table">
+            <thead>
+            <tr>
+                <th>影片</th>
+                <th>时间</th>
+                <th>影院</th>
+                <th>座位</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="movie-name">《{{ film.film_namech }}》</td>
+                <td class="showtime">{{ skd.skd_date }} {{ skd.skd_starttime }}</td>
+                <td class="cinema-name">{{ cinema.cinema_name }}</td>
+                <td>
+                    <span class="hall">{{ hall.hall_name }}厅</span>
+                    <div class="seats">
+                        <div>
+                            {% for seat in seats %}
+                                <span class="border"><i>{{ seat.seat_rowid }}</i>排<i>{{ seat.seat_colid }}</i>座</span>
+                                <span class=""><i>{{ seat.0 }}</i>排<i>{{ seat.1 }}</i>座</span>
+                            {% endfor %}
+
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="right">
+            <div class="price-wrapper">
+                <span>实际支付 :</span>
+                <span class="price">{{ order.order_prices }}</span>
+            </div>
+            <div>
+                <div class="pay-btn" data-order-id="21231213989" data-act="pay-click" data-bid="b_u30afks6">确认支付</div>
+            </div>
+        </div>
+
+        <form name="cashierForm" method="post" action="https://mpay.meituan.com/cashier/pc/index">
+            <input type="hidden" name="token" value="">
+            <input type="hidden" name="tradeno" value="">
+            <input type="hidden" name="pay_token" value="">
+            <input type="hidden" name="website" value="mtmaoyan">
+            <input type="hidden" name="pay_success_url" value="http://www.maoyan.com/order/result/21231213989">
+            <input type="hidden" name="nb_platform" value="www">
+            <input type="hidden" name="nb_source" value="cashier-pcforcustomer">
+        </form>
+
+
+        <div class="modal-container" style="display:none">
+            <div class="modal">
+                <span class="icon"></span>
+
+                <p class="tip">支付超时，该订单已失效，请重新购买</p>
+
+                <div class="ok-btn btn">我知道了</div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block footjs %}
+    <script crossorigin="anonymous" src="{% static 'js/owl_1.7.11.js' %}"></script>
+    <script>
+        Owl.start({
+            project: 'com.sankuai.movie.fe.mywww',
+            pageUrl: location.href.split('?')[0].replace(/\/\d+/g, '/:id'),
+            devMode: false
+        })
+    </script>
+    <!--[if IE 8]><script crossorigin="anonymous" src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/es5-shim.bbad933f.js"></script>
+<![endif]-->
+    <!--[if IE 8]><script crossorigin="anonymous" src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/es5-sham.d6ea26f4.js"></script>
+<![endif]-->
+    <script crossorigin="anonymous" src="{% static 'js/common.5b26e1eb.js' %}"></script>
+    <script crossorigin="anonymous" src="{% static 'js/order-confirm.9c99f3fd.js' %}"></script>
+
+{% endblock footjs %}

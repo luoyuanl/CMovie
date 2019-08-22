@@ -65,6 +65,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # 'libraries': {
+            #     'filter': 'Film.templatetags.filter',
+            #
+            # },
         },
     },
 ]
@@ -79,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'CMovie',
         # 'HOST': '192.168.249.200',
-        # 'HOST':'192.168.1.10',
+        # 'HOST':'192.168.3.25',
         'HOST': '10.0.108.41',
         'USER': 'root',
         'PASSWORD': '524107',
@@ -125,11 +129,8 @@ USE_L10N = True
 
 USE_TZ = False
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
 # 静态资源目录
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # 文件上传路径
@@ -147,8 +148,7 @@ SMSCONFIG = {
     'ACCESS_KEY_ID': "LTAIdpnzZqVdDNUe",
     'ACCESS_KEY_SECRET': "R5i2C5WwbqOdDMxo2ht4EggYoVFtlF",
     'SignName': "CMovie",
-    'TemplateCode': "SMS_172223614"
-
+    'TemplateCode': "SMS_172223614",
 }
 # 邮箱配置
 EMALIL_HOST = 'smtp.163.com'
@@ -160,3 +160,6 @@ EMAIL_FROM = 'CMovie<luoyuan_l@163.com>'
 # 分页配置
 COUNTOFPAGE = 10
 PAGERANGE = 10
+
+# 用户认证
+# AUTH_USER_MODEL = 'User.User'
