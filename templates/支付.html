@@ -34,9 +34,9 @@
             <div class="count-down" data-payleftseconds="839">
                 <p class="time-left">
                     请在
-                    <span class="minute">13</span>
+                    <span class="minute">15</span>
                     分钟
-                    <span class="second">41</span>秒内完成支付
+                    <span class="second"></span>内完成支付
                 </p>
                 <p class="tip">超时订单会自动取消，如遇支付问题，请致电猫眼客服：1010-5335</p>
             </div>
@@ -64,9 +64,8 @@
                         <div>
                             {% for seat in seats %}
                                 <span class="border"><i>{{ seat.seat_rowid }}</i>排<i>{{ seat.seat_colid }}</i>座</span>
-                                <span class=""><i>{{ seat.0 }}</i>排<i>{{ seat.1 }}</i>座</span>
+                                <span class=""><i>{{ seat.seat_rowid }}</i>排<i>{{ seat.seat_colid }}</i>座</span>
                             {% endfor %}
-
                         </div>
                         <div>
                         </div>

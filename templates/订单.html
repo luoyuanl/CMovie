@@ -39,12 +39,12 @@
                                 </div>
                                 <div class="order-price">{{ order.order_prices }}</div>
                                 <div class="order-status">
-                                    {{ order.order_status  }}
+                                    {% ifequal order.order_status 1 %}已完成{% else %}待支付{% endifequal %}
                                 </div>
                                 <div class="actions">
                                     <div>
                                         {% ifequal order.order_status 0%}
-                                        <a href="https://maoyan.com/order/detail/21247410838" class="pay-btn"
+                                        <a href="{% url 'user:payment' %}" class="pay-btn"
                                            data-act="orders-pay-click" data-bid="b_d2ll8ybm">付款</a>
                                         {% endifequal %}
                                         <a href="{% url 'user:orderdetail' order.order_num %}" class="order-detail"

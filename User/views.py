@@ -5,7 +5,7 @@ from datetime import datetime
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 
-from Cinema.models import Orders, Seatlocks, Schedules, Halls, Cinemas
+from Cinema.models import Orders, Seatlocks, Schedules, Halls, Cinemas, Seats
 from Film.models import Films
 from User.sms import send_sms
 from django.core.mail import send_mail
@@ -137,23 +137,55 @@ def orderticket(request):
 
 # 支付
 @csrf_exempt
+# def payment(request):
+#     print(request.method)
+#     if request.method == 'POST':
+#         orderseats = request.POST.getlist('arr')
+#         skdid = request.POST.get('skd')
+#         skd = Schedules.objects.filter(skd_id=skdid).first()
+#         film = Films.objects.filter(film_id=skd.skd_filmid).first()
+#         userphone = request.session['username']
+#         seatlocks = [int(i.strip('seat')) for i in orderseats]
+#         seat = Seatlocks.objects.filter(lock_seatnum__in=seatlocks).all()
+#         hall = Halls.objects.filter(hall_id=skd.skd_hallid).first()
+#         cinema = Cinemas.objects.filter(cinema_id=1).first()
+#         if seat:
+#             return redirect(reverse('film:seat'))
+#         else:
+#             order_num = str(skdid) + datetime.now().strftime('%Y%m%d%H%M%S')
+#             order_price = len(orderseats) * skd.skd_price
+#             while len(seatlocks) < 5:
+#                 seatlocks.append(0)
+#             order = Orders(order_num=order_num, order_userphone=userphone, order_skdid=skdid, order_status=0,
+#                            order_seat1=seatlocks[0], order_seat2=seatlocks[1], order_seat3=seatlocks[2],
+#                            order_seat4=seatlocks[3], order_seat5=seatlocks[4], order_prices=order_price)
+#             order.save()
+#             for i in seatlocks:
+#                 if i != 0:
+#                     lockseat = Seatlocks(lock_type=1, lock_seatnum=i, lock_skdid=skdid, lock_orderid=order_num)
+#                     lockseat.save()
+#         return render(request, '支付.html',
+#                       context={'film': film, 'skd': skd, 'seats': seat, 'hall': hall, 'cinema': cinema, 'order': order})
+#     else:
+#         return render(request, '支付.html',
+#                       context={'title': '支付'})
+
 def payment(request):
-    print(request.method)
     if request.method == 'POST':
-        orderseats = request.POST.getlist('arr')
+        orderseats = request.POST['seats']
+        orderseats = orderseats.split(',')
         skdid = request.POST.get('skd')
         skd = Schedules.objects.filter(skd_id=skdid).first()
         film = Films.objects.filter(film_id=skd.skd_filmid).first()
         userphone = request.session['username']
         seatlocks = [int(i.strip('seat')) for i in orderseats]
-        seat = Seatlocks.objects.filter(lock_seatnum__in=seatlocks).all()
+        print(seatlocks, type(seatlocks))
+        seats = Seatlocks.objects.filter(lock_seatnum__in=seatlocks).all()
         hall = Halls.objects.filter(hall_id=skd.skd_hallid).first()
         cinema = Cinemas.objects.filter(cinema_id=1).first()
-        if seat:
-            print(111)
-            return redirect(reverse('film:seat'))
+        if seats:
+            return redirect(reverse('film:seat', args=(skd.skd_id,)))
         else:
-            print(222)
             order_num = str(skdid) + datetime.now().strftime('%Y%m%d%H%M%S')
             order_price = len(orderseats) * skd.skd_price
             while len(seatlocks) < 5:
@@ -162,16 +194,16 @@ def payment(request):
                            order_seat1=seatlocks[0], order_seat2=seatlocks[1], order_seat3=seatlocks[2],
                            order_seat4=seatlocks[3], order_seat5=seatlocks[4], order_prices=order_price)
             order.save()
-            for i in seatlocks:
-                if i != 0:
-                    lockseat = Seatlocks(lock_type=1, lock_seatnum=i, lock_skdid=skdid, lock_orderid=order_num)
+            orderseats = []
+            for seat in seatlocks:
+                if seat != 0:
+                    lockseat = Seatlocks(lock_type=1, lock_seatnum=seat, lock_skdid=skdid, lock_orderid=order_num)
                     lockseat.save()
-            print(333)
-        print(4444)
-        return render(request, '支付.html',
-                      context={'film': film, 'skd': skd, 'seats': seat, 'hall': hall, 'cinema': cinema, 'order': order})
+                    seatordered = Seats.objects.filter(seat_num=lockseat.lock_seatnum).first()
+                    orderseats.append(seatordered)
+            return render(request, '支付.html',
+                          context={'film': film, 'skd': skd, 'seats': orderseats, 'hall': hall, 'cinema': cinema, 'order': order})
     else:
-        print(555)
         return render(request, '支付.html',
                       context={'title': '支付'})
 

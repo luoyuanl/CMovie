@@ -373,7 +373,7 @@
                 <span class="step-text">影院取票观影</span>
             </div>
         </div>
-{#    <form action="{% url 'user:payment' %}">#}
+        {#    <form action="{% url 'user:payment' %}">#}
         <div class="main clearfix">
             <div class="hall">
                 <div class="seat-example">
@@ -393,15 +393,17 @@
                 <div class="seats-block" data-cols="16" data-section-id="1" data-section-name="全区"
                      data-seq-no="201908050161833">
                     <div class="row-id-container">
-                        <span class="row-id">A</span>
+                        {% for row in hall_rows %}
+                        <span class="row-id">{{ row }}</span>
                         <span class="empty-row-id"></span>
-                        <span class="row-id">B</span>
-                        <span class="empty-row-id"></span>
-                        <span class="row-id">C</span>
-                        <span class="empty-row-id"></span>
-                        <span class="row-id">D</span>
-                        <span class="empty-row-id"></span>
-                        <span class="row-id">E</span>
+{#                        <span class="row-id">B</span>#}
+{#                        <span class="empty-row-id"></span>#}
+{#                        <span class="row-id">C</span>#}
+{#                        <span class="empty-row-id"></span>#}
+{#                        <span class="row-id">D</span>#}
+{#                        <span class="empty-row-id"></span>#}
+{#                        <span class="row-id">E</span>#}
+                        {% endfor %}
                     </div>
                     <div class="seats-container">
                         <div class="screen-container" style="left: 45px;">
@@ -419,7 +421,7 @@
                                                     class="seat selectable"
                                                     data-column-id="{{ col }}"
                                                     data-row-id="{{ row }}"
-                                                    id="seat{{ seat.seat_num }}" data-st="N"
+                                                    id="seat{{ row|seatnum:col }}" data-st="N"
                                                     data-act="seat-click" data-bid="b_s7eiiijf">
                                                 </span>
 
@@ -508,26 +510,26 @@
                                     <input class="iLoginComp-code-input" id="codeInput" type="text" placeholder="填写验证码">
                                     <div class="iLoginComp-send-verify-code-text" id="sendCodeBtn">获取验证码</div>
                                 </div>
+                                </div>
                                 <div class="iLogincomp-opbtn-wrapper">
                                 <button class="iLoginComp-cancel-btn-wrapper" id="cancelLogin" style="display:none;">
                                     取消
                                 </button>
                             {% endif %}
-                            <a href="{% url 'user:payment' %}">
+                            <form action="{% url 'user:payment' %}" method="POST">
+                                <input type="hidden" name="seats" value="0" id="seatid">
+                                <input type="hidden" name="skd" value="{{ skd.skd_id }}">
                                 <button type="submit" class="iLoginComp-login-btn-wrapper" id="iloginBtn">
                                     确认选座
                                 </button>
+                                </form>
                             </a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
-
         <div class="modal-container" style="display:none">
             <div class="modal">
                 <span class="icon"></span>
@@ -566,7 +568,6 @@
                     $('.has-ticket').css('display', 'block');
                     $('#iloginBtn').removeClass('disabled');
                     $(".ticket-container").append('<span class="ticket" data-row-id="' + rowid + '"data-column-id="' + colid + '" id="' + rowid + '-' + colid + '">' + rowid + '排' + colid + '座</span>');
-
                 }
             } else if ($(this).hasClass('selected')) {
                 $("#" + seatid).prop('class', 'seat selectable');
@@ -587,42 +588,46 @@
         });
     </script>
     <script>
-    $.ajax({
-                cache: false,
-                type: "POST",
-                url: "{% url 'user:payment'%}",
-                traditional: true,
-                data: {
-                    arr: arr,
-                    skd:{{ skd.skd_id }},
-                },
-                dataType: 'json',
-                async: true,
-                success: function (data) {
-                    console.log(data);
-                    window.location.href = "{% url 'user:payment'%}";
-                    console.log('123')
-                },
-                error: function (data) {
-                    console.log(data,'11111')
-
+        $("#iloginBtn").click(function () {
+            $('#seatid').prop('value',arr);
+            var x=$('#seatid').val();
+            console.log(x);
+            {#$.ajax({#}
+            {#    cache: false,#}
+            {#    type: "POST",#}
+            {#    url: "{% url 'user:payment'%}",#}
+            {#    traditional: true,#}
+            {#    data: {#}
+            {#        arr: arr,#}
+            {#        skd:{{ skd.skd_id }},#}
+            {#    },#}
+            {#    dataType: 'json',#}
+            {#    async: true,#}
+            {#    success: function (data) {#}
+            {#        console.log(data);#}
+            {#        window.location.href = "{% url 'user:payment'%}";#}
+            {#        console.log('123')#}
+            {#    },#}
+            {#    error: function (data) {#}
+            {#        console.log(data, '11111');#}
+            {##}
                     {#alert('error');#}
                     {#window.location.href = "{% url 'user:payment'%}";#}
-                }
-            })
+            {#    }})#}
+        })
     </script>
-{#    <script>#}
-{#        $("#iloginBtn").click(function () {#}
-            {#console.log('data');#}
-            {#console.log(arr);#}
-{#            $.post("{% url 'user:payment'%}",data={#}
-{#                    arr: arr,#}
-{#                    skd:{{ skd.skd_id }},#}
-{#                },function f(data) {#}
-{#                console.log(data);#}
-{#                window.location.href = "{% url 'user:payment'%}";#}
-{#            })#}
-{##}
-{#        })#}
-{#    </script>#}
+    {#    <script>#}
+    {#        $("#iloginBtn").click(function () {#}
+    {#console.log('data');#}
+    {#console.log(arr);#}
+    {#            $.post("{% url 'user:payment'%}",data={#}
+    {#                    arr: arr,#}
+    {#                    skd:{{ skd.skd_id }},#}
+    {#                },function f(data) {#}
+    {#                console.log(data);#}
+    {#                window.location.href = "{% url 'user:payment'%}";#}
+    {#            })#}
+    {##}
+    {#        })#}
+    {#    </script>#}
 {% endblock %}

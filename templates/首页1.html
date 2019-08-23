@@ -32,7 +32,7 @@
                         <div class="panel-content">
                             <ul class="ranking-wrapper ranking-box">
                                 <li class="ranking-item ranking-top ranking-index-1">
-                                    <a href="{% url 'film:filmdetail' films_pf1.film_id %}0" target="_blank"
+                                    <a href="{% url 'film:filmdetail' films_pf1.film_id %}0" target="_self"
                                        data-act="ticketList-movie-click" data-val="{{ film.film_id }}">
                                         <div class="ranking-top-left">
                                             <i class="ranking-top-icon"></i>
@@ -51,7 +51,7 @@
                                 </li>
                                 {% for film in films_pf %}
                                     <li class="ranking-item ranking-index-2">
-                                        <a href="{% url 'film:filmdetail' film.film_id %}" target="_blank"
+                                        <a href="{% url 'film:filmdetail' film.film_id %}" target="_self"
                                            data-act="ticketList-movie-click" data-val="{movieid:1243361}">
                                       <span class="normal-link">
                                         <i class="ranking-index">{{ forloop.counter | add:'1' }}</i>
@@ -84,7 +84,7 @@
                         <div class="panel-content">
                             <ul class="ranking-wrapper ranking-mostExpect">
                                 <li class="ranking-item ranking-top ranking-index-1">
-                                    <a href="{% url 'film:filmdetail' films_want1.film_id%}" target="_blank"
+                                    <a href="{% url 'film:filmdetail' films_want1.film_id%}" target="_self"
                                        data-act="mostExpect-movie-click" data-val="{movieid:1215605}">
                                         <div class="ranking-top-left">
                                             <i class="ranking-top-icon"></i>
@@ -105,7 +105,7 @@
                                 </li>
                                 {% for film in films_want23 %}
                                     <li class="ranking-item ranking-index-2">
-                                        <a href="{% url 'film:filmdetail' film.film_id%}" target="_blank"
+                                        <a href="{% url 'film:filmdetail' film.film_id%}" target="_self"
                                            data-act="mostExpect-movie-click" data-val="{{ film.film_id }}">
                                             <i class="ranking-index">2</i>
                                             <span class="img-link">
@@ -120,7 +120,7 @@
                                 {% endfor %}
                                 {% for film in films_want %}
                                     <li class="ranking-item ranking-index-4">
-                                        <a href="{% url 'film:filmdetail' film.film_id %}" target="_blank"
+                                        <a href="{% url 'film:filmdetail' film.film_id %}" target="_self"
                                            data-act="mostExpect-movie-click" data-val="{{ film.film_id }}">
                                           <span class="normal-link">
                                             <i class="ranking-index">{{ forloop.counter | add:'3' }}</i>
@@ -152,7 +152,7 @@
                         <div class="panel-content">
                             <ul class="ranking-wrapper ranking-top100">
                                 <li class="ranking-item ranking-top ranking-index-1">
-                                    <a href="{% url 'film:filmdetail' films_rank1.film_id %}" target="_blank"
+                                    <a href="{% url 'film:filmdetail' films_rank1.film_id %}" target="_self"
                                        data-act="TOP100-movie-click" data-val="{movieid:1203}">
                                         <div class="ranking-top-left">
                                             <i class="ranking-top-icon"></i>
@@ -171,7 +171,7 @@
                                 </li>
                                 {% for film in films_rank %}
                                     <li class="ranking-item ranking-index-2">
-                                        <a href="{% url 'film:filmdetail' film.film_id %}" target="_blank"
+                                        <a href="{% url 'film:filmdetail' film.film_id %}" target="_self"
                                            data-act="TOP100-movie-click" data-val="{movieid:4055}">
                                           <span class="normal-link">
                                             <i class="ranking-index">{{ forloop.counter | add:'1' }}</i>
@@ -253,7 +253,7 @@
                                 {% for film in films_coming %}
                                     <dd>
                                         <div class="movie-item">
-                                            <a href="{% url 'film:filmdetail' film.film_id %}" target="_blank"
+                                            <a href="{% url 'film:filmdetail' film.film_id %}" target="_self"
                                                data-act="upcomingMovie-click" data-val="{{ film.film_id }}">
                                                 <div class="movie-poster">
                                                     <img src="{{ film.film_photo }}" alt="{{ film.film_namech }}">
@@ -270,7 +270,7 @@
                                             <div class="movie-detail movie-detail-strong movie-presale">
                                                 <a class="movie-presale-sep">预告片</a>
                                                 <a href="{% url 'film:schedule'  film.film_id%}" class="active"
-                                                       target="_blank" data-act="presaleUpcomingMovie-click"
+                                                       target="_self" data-act="presaleUpcomingMovie-click"
                                                        data-val="{{ film.film_id }}">预 售</a>
                                             </div>
                                             <div class="movie-ver"></div>
@@ -317,7 +317,7 @@
                             <dl class="movie-list">
                                 <dd>
                                     <div class="movie-item">
-                                        <a href="{% url 'film:filmdetail' films_hot1.film_id %}" target="_blank"
+                                        <a href="{% url 'film:filmdetail' films_hot1.film_id %}" target="_self"
                                            data-act="hotMovie-click" data-val="{{ films_hot1.film_id }}">
                                             <div class="movie-poster movie-poster-long">
                                                 <img src="{{ films_hot1.film_photo }}">
@@ -336,7 +336,7 @@
                                 {% for film in films_hot %}
                                     <dd>
                                     <div class="movie-item">
-                                        <a href="https://maoyan.com/films/48742" target="_blank"
+                                        <a href="https://maoyan.com/films/48742" target="_self"
                                            data-act="hotMovie-click" data-val="{movieid:48742}">
                                             <div class="movie-poster">
                                                 {#        <img class="poster-default" src="./猫眼电影 - 一网打尽好电影_files/loading_2.e3d934bf.png">#}

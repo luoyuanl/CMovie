@@ -164,37 +164,6 @@ def seat(request, skd_id):
     locks = Seatlocks.objects.filter(~Q(lock_type=0)).all()
     locksarr = [i.lock_seatnum for i in locks]
     user = Users.objects.filter(user_phone=request.session['username']).first()
-    # request.session['filmname'] = film.film_namech
-    # request.session['hall'] = hall.hall_name
-    # request.session['cinema'] = cinema.cinema_name
-    # date = str(skd.skd_date)
-    # request.session['date'] = date
-    # time = str(skd.skd_starttime)
-    # request.session['time'] = time
-    # 提交座位，验证是否被锁定
-    if request.method == "POST":
-        orderseats = request.POST.getlist('arr')
-        for i in orderseats:
-            i = int(i.strip('seat'))
-            seat = Seatlocks.objects.filter(lock_type=0, lock_seatnum=i).first()
-            lockids = []
-            # 选座中途，有别的数据插入数据库
-            if seat:
-                render(request, '选座1.html', locals())
-            # 正常提交，在锁定表插入数据
-            else:
-                seatlocks = []
-                for i in orderseats:
-                    i = int(i.strip('seat'))
-                    lockseat = Seatlocks(lock_type=1, lock_seatnum=i, lock_skdid=skd.skd_id)
-                    lockseat.save()
-                    seatid = Seats.objects.filter(seat_num=i).first()
-                    seatlocks.append(seatid)
-                # print(len(orderseats))
-                # prices = skd.skd_price * len(orderseats)
-                # print(prices)
-                # request.session['prices'] = prices
-            return render(request, '支付.html', locals())
     return render(request, '选座1.html', locals())
 
 

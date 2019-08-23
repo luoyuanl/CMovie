@@ -167,7 +167,7 @@
     {#    </script>#}
     <script>
         {% for film in films %}
-            $(document).onload(function () {
+            $(document).ready(function () {
                 $('#pic{{ film.film_id }}').click(function () {
                     $('#div{{ film.film_id}}').css('display', 'block');
                     $('#div{{ film.film_id}}').siblings().css('display', 'none');
@@ -183,7 +183,6 @@
             });
         {% endfor %}
     </script>
-
     <!--[if IE 8]><script crossorigin="anonymous" src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/es5-shim.bbad933f.js"></script>
     <![endif]-->
     <!--[if IE 8]><script crossorigin="anonymous" src="//s3plus.meituan.net/v1/mss_e2821d7f0cfe4ac1bf9202ecf9590e67/cdn-prod/file:5788b470/es5-sham.d6ea26f4.js"></script>
