@@ -1,0 +1,297 @@
+{% extends 'admin/admin1.html' %}
+
+{% block content %}
+        <!--内容-->
+        <section class="content-header">
+            <h1>影院后台管理</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 电影管理</a></li>
+                <li class="active">添加电影 </li>
+
+            </ol>
+        </section>
+        <section class="content" id="showcontent">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">添加电影</h3>
+                        </div>
+
+
+
+                        <form role="form" action="{% url "cinema:movie_add" %}" method="post" enctype="multipart/form-data" >
+                            {% csrf_token %}
+{#                            # 影片id，中文片名,上映日期，上映状态，主演123，海报路径，评分，导演#}
+                                <div class="form-group">
+                                    <label for="input_title">中文名称</label>
+                                    <input name="zwmc" type="text" class="form-control" id="input_title" placeholder="请输入片名！">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="input_release_time">上映时间</label>
+                                    <input name="sysj" type="text" class="form-control" id="input_release_time"
+                                           placeholder="请选择上映时间！">
+                                </div>
+
+
+                            <div class="form-group">
+                                    <label for="input_tag_id">上映状态</label>
+                                    <select name="syzt" class="form-control" id="input_tag_id">
+                                        <option value="0">正在热播</option>
+                                        <option value="1">即将上映</option>
+                                        <option value="2">未上映</option>
+                                    </select>
+                                </div>
+
+                            <div class="form-group">
+                                    <label for="input_logo">海报</label>
+                                    <input type="file" id="input_logo" name="poster">
+                                    <img data-src="holder.js/262x166" style="margin-top:5px;" class="img-responsive"
+                                         alt="">
+                                </div>
+
+
+                            <div class="form-group">
+                                    <label for="input_length">主演1</label>
+                                    <input name="zhuyan1" type="text" class="form-control" id="input_length" placeholder="请输入语言版本！">
+                                </div>
+                            <div class="form-group">
+                                    <label for="input_length">主演2</label>
+                                    <input name="zhuyan2" type="text" class="form-control" id="input_length" placeholder="请输入语言版本！">
+                                </div>
+                            <div class="form-group">
+                                    <label for="input_length">主演3</label>
+                                    <input name="zhuyan3" type="text" class="form-control" id="input_length" placeholder="请输入语言版本！">
+                                </div>
+
+                            <div class="form-group">
+                                    <label for="input_length">导演</label>
+                                    <input name="daoyan" type="text" class="form-control" id="input_length" placeholder="请输入语言版本！">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="input_tag_id">影片类型1</label>
+                                    <select name="yplx1" class="form-control" id="input_tag_id">
+                                        <option value="1">爱情</option>
+                                        <option value="2">喜剧</option>
+                                        <option value="3">动画</option>
+                                        <option value="4">剧情</option>
+                                        <option value="5">恐怖</option>
+                                        <option value="6">惊悚</option>
+                                        <option value="7">科幻</option>
+                                        <option value="8">动作</option>
+                                        <option value="9">悬疑</option>
+                                        <option value="10">犯罪</option>
+                                        <option value="11">冒险</option>
+                                        <option value="12">战争</option>
+                                        <option value="13">奇幻</option>
+                                        <option value="14">运动</option>
+                                        <option value="15">家庭</option>
+                                        <option value="16">古装</option>
+                                        <option value="17">武侠</option>
+                                        <option value="18">西部</option>
+                                        <option value="19">历史</option>
+                                        <option value="20">传记</option>
+                                        <option value="21">歌舞</option>
+                                        <option value="22">黑色电影</option>
+                                        <option value="23">短片</option>
+                                        <option value="24">纪录片</option>
+                                        <option value="25">其他</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_tag_id">影片类型2</label>
+                                    <select name="yplx2" class="form-control" id="input_tag_id">
+                                        <option value="1">爱情</option>
+                                        <option value="2">喜剧</option>
+                                        <option value="3">动画</option>
+                                        <option value="4">剧情</option>
+                                        <option value="5">恐怖</option>
+                                        <option value="6">惊悚</option>
+                                        <option value="7">科幻</option>
+                                        <option value="8">动作</option>
+                                        <option value="9">悬疑</option>
+                                        <option value="10">犯罪</option>
+                                        <option value="11">冒险</option>
+                                        <option value="12">战争</option>
+                                        <option value="13">奇幻</option>
+                                        <option value="14">运动</option>
+                                        <option value="15">家庭</option>
+                                        <option value="16">古装</option>
+                                        <option value="17">武侠</option>
+                                        <option value="18">西部</option>
+                                        <option value="19">历史</option>
+                                        <option value="20">传记</option>
+                                        <option value="21">歌舞</option>
+                                        <option value="22">黑色电影</option>
+                                        <option value="23">短片</option>
+                                        <option value="24">纪录片</option>
+                                        <option value="25">其他</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_tag_id">影片类型3</label>
+                                    <select name="yplx3" class="form-control" id="input_tag_id">
+                                        <option value="1">爱情</option>
+                                        <option value="2">喜剧</option>
+                                        <option value="3">动画</option>
+                                        <option value="4">剧情</option>
+                                        <option value="5">恐怖</option>
+                                        <option value="6">惊悚</option>
+                                        <option value="7">科幻</option>
+                                        <option value="8">动作</option>
+                                        <option value="9">悬疑</option>
+                                        <option value="10">犯罪</option>
+                                        <option value="11">冒险</option>
+                                        <option value="12">战争</option>
+                                        <option value="13">奇幻</option>
+                                        <option value="14">运动</option>
+                                        <option value="15">家庭</option>
+                                        <option value="16">古装</option>
+                                        <option value="17">武侠</option>
+                                        <option value="18">西部</option>
+                                        <option value="19">历史</option>
+                                        <option value="20">传记</option>
+                                        <option value="21">歌舞</option>
+                                        <option value="22">黑色电影</option>
+                                        <option value="23">短片</option>
+                                        <option value="24">纪录片</option>
+                                        <option value="25">其他</option>
+
+                                    </select>
+                                </div>
+                            <div class="form-group">
+                                    <label for="input_tag_id">影片类型4</label>
+                                    <select name="yplx4" class="form-control" id="input_tag_id">
+                                        <option value="1">爱情</option>
+                                        <option value="2">喜剧</option>
+                                        <option value="3">动画</option>
+                                        <option value="4">剧情</option>
+                                        <option value="5">恐怖</option>
+                                        <option value="6">惊悚</option>
+                                        <option value="7">科幻</option>
+                                        <option value="8">动作</option>
+                                        <option value="9">悬疑</option>
+                                        <option value="10">犯罪</option>
+                                        <option value="11">冒险</option>
+                                        <option value="12">战争</option>
+                                        <option value="13">奇幻</option>
+                                        <option value="14">运动</option>
+                                        <option value="15">家庭</option>
+                                        <option value="16">古装</option>
+                                        <option value="17">武侠</option>
+                                        <option value="18">西部</option>
+                                        <option value="19">历史</option>
+                                        <option value="20">传记</option>
+                                        <option value="21">歌舞</option>
+                                        <option value="22">黑色电影</option>
+                                        <option value="23">短片</option>
+                                        <option value="24">纪录片</option>
+                                        <option value="25">其他</option>
+
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="input_length">语言类型1</label>
+                                    <input name="yylx1" type="text" class="form-control" id="input_length" placeholder="请输入语言类型">
+                                </div>
+                            <div class="form-group">
+                                    <label for="input_length">语言类型2</label>
+                                    <input name="yylx2" type="text" class="form-control" id="input_length" placeholder="请输入语言类型">
+                                </div>
+
+                            <div class="form-group">
+                                    <label for="input_length">影片时长</label>
+                                    <input name="ypsc" type="text" class="form-control" id="input_length" placeholder="请输入影片时长（分钟）">
+                                </div>
+
+                            <div class="form-group">
+                                    <label for="input_length">拍摄国家</label>
+                                    <input name="psgj" type="text" class="form-control" id="input_length" placeholder="请输入拍摄国家">
+                                </div>
+                            <div class="form-group">
+                                    <label for="input_length">总票房</label>
+                                    <input name="zpf" type="text" class="form-control" id="input_length" placeholder="请输入总票房">
+                                </div>
+                            <div class="form-group">
+                                    <label for="input_length">今日票房</label>
+                                    <input name="jrpf" type="text" class="form-control" id="input_length" placeholder="请输入今日票房">
+                                </div>
+                            <div class="form-group">
+                                    <label for="input_length">评分</label>
+                                    <input name="pingfen" type="text" class="form-control" id="input_length" placeholder="请输入评分！">
+                                </div>
+
+
+                            <div class="form-group">
+                                    <label for="input_info">影片简介</label>
+                                    <textarea name="ypjj" class="form-control" rows="10" id="input_info"></textarea>
+                                </div>
+
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">添加</button>
+                                {{ error }}
+                                {{ error1 }}
+                                {{ error2 }}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--内容-->
+
+{% endblock content %}
+
+{% block js %}
+
+<script src=" /static/backstage/jwplayer/jwplayer.js "></script>
+{#<script src="{% static 'backstage/jwplayer/jwplayer.js' %} "></script>#}
+<script type="text/javascript">
+    jwplayer.key = "P9VTqT/X6TSP4gi/hy1wy23BivBhjdzVjMeOaQ==";
+
+</script>
+<script type="text/javascript">
+    jwplayer("moviecontainer").setup({
+        flashplayer: "/static/jwplayer/jwplayer.flash.swf",
+        playlist: [{
+            file: "/static/video/htpy.mp4",
+            title: "环太平洋"
+        }],
+        modes: [{
+            type: "html5"
+        }, {
+            type: "flash",
+            src: "/static/jwplayer/jwplayer.flash.swf"
+        }, {
+            type: "download"
+        }],
+        skin: {
+            name: "vapor"
+        },
+        "playlist.position": "left",
+        "playlist.size": 200,
+        height: 250,
+        width: 387,
+    });
+
+</script>
+<script>
+    $(document).ready(function(){
+        $('#input_release_time').datepicker({
+            autoclose: true,
+            format: 'yyyy-mm-dd',
+            language: 'zh-CN',
+        });
+    });
+
+</script>
+
+{% endblock js %}
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+<form action="{% url 'user:register' %}" method="post">
+    {% csrf_token %}
+    <label>
+        <input type="text" name="mobile"/>
+    </label>手机号
+    <label>
+        <input type="password" name="password"/>
+    </label>密码
+    <input type="submit">
+</form>
+{% for film in films %}
+    <div>
+    <h1>name:{{ film.film_namech }}</h1>
+    <h2>rating:{{ film.filmpf.film_rating }}</h2>
+    <h3>intro:{{ film.detail.film_intro }}</h3>
+    </div>
+{% endfor %}
+
+
+</body>
+
+</html>
